@@ -1,4 +1,6 @@
 import 'package:calculus/pages/game/components/answers.dart';
+import 'package:calculus/pages/game/models/question.dart';
+import 'package:calculus/pages/game/utils/question_generator.dart';
 import 'package:flutter/material.dart';
 
 class GamePage extends StatefulWidget {
@@ -9,11 +11,12 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
-  List<String> answers = ["1", "2", "3", "4"];
+  late Question _actualQuestion;
 
   @override
   void initState() {
     super.initState();
+    _actualQuestion = QuestionGenerator.easy();
   }
 
   @override
@@ -22,16 +25,34 @@ class _GamePageState extends State<GamePage> {
       body: SafeArea(
         child: Column(
           children: [
-            const Expanded(
+            Expanded(
               flex: 1,
-              child: Center(
-                child: Text("Calculus here"),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        _actualQuestion.operation,
+                        style: const TextStyle(
+                          fontSize: 42,
+                        ),
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.refresh),
+                    onPressed: () => setState(() {
+                      _actualQuestion = QuestionGenerator.easy();
+                    }),
+                  )
+                ],
               ),
             ),
             Expanded(
               flex: 2,
               child: Answers(
-                answers: answers,
+                answers: _actualQuestion.answers,
               ),
             ),
           ],
