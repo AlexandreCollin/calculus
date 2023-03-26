@@ -10,9 +10,18 @@ class Calculus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          ),
+        ),
+      ),
       debugShowCheckedModeBanner: false,
-      home: StartPage(),
+      home: const StartPage(),
     );
   }
 }

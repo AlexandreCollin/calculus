@@ -3,17 +3,27 @@ import 'package:calculus/pages/game/models/symbols.dart';
 import 'package:calculus/pages/game/utils/answer_generator.dart';
 import 'package:calculus/pages/game/utils/calculation_generator.dart';
 
+enum Difficulty {
+  easy(0, "Easy"),
+  medium(1, "Medium"),
+  hard(2, "Hard");
+
+  const Difficulty(this.value, this.name);
+
+  final int value;
+  final String name;
+}
+
 class QuestionGenerator {
   static double _compute(String operation) {
     final List<String> values = operation.split(" ");
-    double result = 0;
+    double result = double.parse(values[0]);
 
-    for (int i = 0; i < values.length; i += 3) {
-      final double value1 = double.parse(values[i]);
-      final Symbols symbol = Symbols.fromString(values[i + 1]);
-      final double value2 = double.parse(values[i + 2]);
+    for (int i = 1; i < values.length; i += 2) {
+      final Symbols symbol = Symbols.fromString(values[i]);
+      final double value = double.parse(values[i + 1]);
 
-      result += symbol.compute(value1, value2);
+      result = symbol.compute(result, value);
     }
     return result;
   }
@@ -52,5 +62,36 @@ class QuestionGenerator {
       maxCalculations: 1,
       precision: 0,
     );
+  }
+
+  static Question medium() {
+    return _generate(
+      minValue: 1,
+      maxValue: 100,
+      symbols: [Symbols.addition],
+      maxCalculations: 3,
+      precision: 0,
+    );
+  }
+
+  static Question hard() {
+    return _generate(
+      minValue: 1,
+      maxValue: 9,
+      symbols: [Symbols.addition],
+      maxCalculations: 1,
+      precision: 0,
+    );
+  }
+
+  static Question byDifficulty(Difficulty difficulty) {
+    switch (difficulty) {
+      case Difficulty.easy:
+        return easy();
+      case Difficulty.medium:
+        return medium();
+      case Difficulty.hard:
+        return hard();
+    }
   }
 }

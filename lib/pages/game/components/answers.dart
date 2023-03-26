@@ -20,17 +20,13 @@ class Answers extends StatelessWidget {
         color: Colors.blueGrey,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: GridView.count(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            crossAxisCount: (question.answers.length / 2).round(),
-            childAspectRatio: 0.8,
-            mainAxisSpacing: 12.0,
-            crossAxisSpacing: 12.0,
-            children: question.answers.map((e) {
-              return InkWell(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: question.answers.map((e) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: InkWell(
                 onTap: () => onAnswer(e),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
@@ -43,18 +39,21 @@ class Answers extends StatelessWidget {
                                 : Colors.white,
                     borderRadius: BorderRadius.circular(14),
                   ),
-                  child: Center(
-                    child: Text(
-                      e,
-                      style: const TextStyle(
-                        fontSize: 42,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: Center(
+                      child: Text(
+                        e,
+                        style: const TextStyle(
+                          fontSize: 42,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              );
-            }).toList(),
-          ),
+              ),
+            );
+          }).toList(),
         ),
       ),
     );
