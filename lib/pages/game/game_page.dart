@@ -20,6 +20,13 @@ class _GamePageState extends State<GamePage> {
     _actualQuestion = QuestionGenerator.easy();
   }
 
+  void _nextQuestion() {
+    setState(() {
+      _actualQuestion = QuestionGenerator.easy();
+      selectedAnswer = null;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,35 +35,30 @@ class _GamePageState extends State<GamePage> {
           children: [
             Expanded(
               flex: 1,
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        _actualQuestion.operation,
-                        style: const TextStyle(
-                          fontSize: 42,
-                        ),
-                      ),
-                    ),
+              child: Center(
+                child: Text(
+                  _actualQuestion.operation,
+                  style: const TextStyle(
+                    fontSize: 42,
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.refresh),
-                    onPressed: () => setState(() {
-                      _actualQuestion = QuestionGenerator.easy();
-                    }),
-                  )
-                ],
+                ),
               ),
             ),
             Expanded(
               flex: 2,
               child: Answers(
                 question: _actualQuestion,
-                onAnswer: (answer) => setState(() {
-                  selectedAnswer = answer;
-                }),
+                onAnswer: (answer) {
+                  if (selectedAnswer == null) {
+                    setState(() {
+                      selectedAnswer = answer;
+                    });
+                    Future.delayed(
+                      const Duration(seconds: 1),
+                      _nextQuestion,
+                    );
+                  }
+                },
                 answer: selectedAnswer,
               ),
             ),
