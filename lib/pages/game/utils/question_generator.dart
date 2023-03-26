@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:calculus/pages/game/models/question.dart';
 import 'package:calculus/pages/game/models/symbols.dart';
 import 'package:calculus/pages/game/utils/answer_generator.dart';

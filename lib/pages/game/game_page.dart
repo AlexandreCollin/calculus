@@ -12,6 +12,7 @@ class GamePage extends StatefulWidget {
 
 class _GamePageState extends State<GamePage> {
   late Question _actualQuestion;
+  String? selectedAnswer;
 
   @override
   void initState() {
@@ -52,7 +53,11 @@ class _GamePageState extends State<GamePage> {
             Expanded(
               flex: 2,
               child: Answers(
-                answers: _actualQuestion.answers,
+                question: _actualQuestion,
+                onAnswer: (answer) => setState(() {
+                  selectedAnswer = answer;
+                }),
+                answer: selectedAnswer,
               ),
             ),
           ],
