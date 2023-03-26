@@ -4,7 +4,7 @@ class Answers extends StatelessWidget {
   const Answers({
     super.key,
     required this.answers,
-  });
+  }) : assert(answers.length > 0);
 
   final List<String> answers;
 

@@ -9,7 +9,7 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
-  List<String> answers = [];
+  List<String> answers = ["1", "2", "3", "4"];
 
   @override
   void initState() {
