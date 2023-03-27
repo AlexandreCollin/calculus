@@ -2,6 +2,7 @@ import 'package:calculus/pages/game/models/question.dart';
 import 'package:calculus/pages/game/models/symbols.dart';
 import 'package:calculus/pages/game/utils/answer_generator.dart';
 import 'package:calculus/pages/game/utils/calculation_generator.dart';
+import 'package:calculus/pages/game/utils/computeur.dart';
 
 enum Difficulty {
   easy(0, "Easy"),
@@ -15,19 +16,6 @@ enum Difficulty {
 }
 
 class QuestionGenerator {
-  static double _compute(String operation) {
-    final List<String> values = operation.split(" ");
-    double result = double.parse(values[0]);
-
-    for (int i = 1; i < values.length; i += 2) {
-      final Symbols symbol = Symbols.fromString(values[i]);
-      final double value = double.parse(values[i + 1]);
-
-      result = symbol.compute(result, value);
-    }
-    return result;
-  }
-
   static Question _generate({
     required double minValue,
     required double maxValue,
@@ -42,7 +30,7 @@ class QuestionGenerator {
       maxCalculations: maxCalculations,
       precision: precision,
     );
-    final double value = _compute(operation);
+    final double value = Computeur.compute(operation);
 
     return Question(
       operation: operation,
@@ -67,8 +55,8 @@ class QuestionGenerator {
   static Question medium() {
     return _generate(
       minValue: 1,
-      maxValue: 100,
-      symbols: [Symbols.addition],
+      maxValue: 50,
+      symbols: [Symbols.addition, Symbols.substraction],
       maxCalculations: 3,
       precision: 0,
     );
@@ -78,8 +66,8 @@ class QuestionGenerator {
     return _generate(
       minValue: 1,
       maxValue: 9,
-      symbols: [Symbols.addition],
-      maxCalculations: 1,
+      symbols: [Symbols.addition, Symbols.multiplication],
+      maxCalculations: 2,
       precision: 0,
     );
   }
