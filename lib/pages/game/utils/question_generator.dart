@@ -2,7 +2,7 @@ import 'package:calculus/pages/game/models/question.dart';
 import 'package:calculus/pages/game/models/symbols.dart';
 import 'package:calculus/pages/game/utils/answer_generator.dart';
 import 'package:calculus/pages/game/utils/calculation_generator.dart';
-import 'package:calculus/pages/game/utils/computeur.dart';
+import 'package:calculus/pages/game/utils/computer.dart';
 
 enum Difficulty {
   easy(0, "Easy"),
@@ -54,8 +54,8 @@ class QuestionGenerator {
 
   static Question medium() {
     return _generate(
-      minValue: 1,
-      maxValue: 50,
+      minValue: 2,
+      maxValue: 25,
       symbols: [Symbols.addition, Symbols.substraction],
       maxCalculations: 2,
       precision: 0,
@@ -64,8 +64,8 @@ class QuestionGenerator {
 
   static Question hard() {
     return _generate(
-      minValue: 1,
-      maxValue: 9,
+      minValue: 2,
+      maxValue: 50,
       symbols: [Symbols.addition, Symbols.multiplication],
       maxCalculations: 3,
       precision: 0,
