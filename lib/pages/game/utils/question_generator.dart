@@ -30,7 +30,7 @@ class QuestionGenerator {
       maxCalculations: maxCalculations,
       precision: precision,
     );
-    final double value = Computeur.compute(operation);
+    final double value = Computer.compute(operation);
 
     return Question(
       operation: operation,
@@ -57,7 +57,7 @@ class QuestionGenerator {
       minValue: 1,
       maxValue: 50,
       symbols: [Symbols.addition, Symbols.substraction],
-      maxCalculations: 3,
+      maxCalculations: 2,
       precision: 0,
     );
   }
@@ -67,7 +67,7 @@ class QuestionGenerator {
       minValue: 1,
       maxValue: 9,
       symbols: [Symbols.addition, Symbols.multiplication],
-      maxCalculations: 2,
+      maxCalculations: 3,
       precision: 0,
     );
   }

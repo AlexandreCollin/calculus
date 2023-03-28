@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
+
 class AnswerGenerator {
   static List<String> generate({
     required double value,
@@ -12,9 +14,14 @@ class AnswerGenerator {
       String wrongAnswer = "";
       do {
         int deviation = (value * percentage / 100).floor();
-        wrongAnswer = (value + Random().nextInt(deviation * 2 + 1) - deviation)
-            .toStringAsFixed(precision);
+        if (value < 0) deviation *= -1;
+        double wrongValue =
+            value + Random().nextInt(deviation * 2 + 1) - deviation;
+        wrongAnswer = wrongValue.toStringAsFixed(precision);
         percentage += 10;
+        if (kDebugMode) {
+          print(wrongValue);
+        }
       } while (answers.contains(wrongAnswer) || wrongAnswer == correctAnwer);
       answers.add(wrongAnswer);
     }
