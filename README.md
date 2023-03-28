@@ -24,6 +24,8 @@ After, it add a symbol from `symbols` and a number as many times as `maxCalculat
 
 It takes a String that is the calculation to compute.
 
+### How it works ?
+
 It parse the values with spaces like : "1 + 2 \* 3" -> ["1", "+", "2", "\*", "3"].
 
 It crea nvnte a new list that contain double and fill it with the following pattern :
@@ -36,4 +38,37 @@ And add the last number to the list of double.
 
 After that, it adds all the values ​​together to give a result.
 
+To visualize the process, here is an example of what happen:
+
+```bash
+1 + 2 * 3 * 4 + 5
+[]
+-----------------
+2 * 3 * 4 + 5
+[1]
+-----------------
+6 * 4 + 5
+[1]
+-----------------
+24 + 5
+[1]
+-----------------
+5
+[1, 24]
+-----------------
+
+[1, 24, 5]
+-----------------
+result = 1 + 24 + 5 = 30
+```
+
 ## AnswerGenerator class
+
+It takes two parameters :
+
+- double `value`, that is the value of the calculus in order to create false answer around it.
+- int `precision`, that is the number of decimals in false answers.
+
+It returns a List of String that contains tree false answers.
+
+In order to create answers around the `value` we create a `deviation` from a percentage that is initialised to 10%, and we create a wrong answer from random in the range of `value` +- `deviation` and we increment the value of the percentage of 10% after each answer.

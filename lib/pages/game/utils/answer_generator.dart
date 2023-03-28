@@ -25,7 +25,7 @@ class AnswerGenerator {
       } while (answers.contains(wrongAnswer) || wrongAnswer == correctAnwer);
       answers.add(wrongAnswer);
     }
-    answers.insert(1 + Random().nextInt(3), correctAnwer);
+    answers.insert(Random().nextInt(3), correctAnwer);
     return answers;
   }
 }
