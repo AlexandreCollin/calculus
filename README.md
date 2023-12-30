@@ -26,13 +26,13 @@ It takes a String that is the calculation to compute.
 
 ### How it works ?
 
-It parse the values with spaces like : "1 + 2 \* 3" -> ["1", "+", "2", "\*", "3"].
+It parse the values with spaces like : `1 + 2 \* 3` -> `["1", "+", "2", "\*", "3"]`.
 
 It crea nvnte a new list that contain double and fill it with the following pattern :
 
-- If there is no priority like addition or subtraction, add it to the new list like : ["1", "+"] -> [1].
+- If there is no priority like addition or subtraction, add it to the new list like : `["1", "+"]` -> `[1]`.
 
-- If there is a priority like multiplication or division, it computes the value without adding it to the list of double like: ["2", "*", "3"] -> ["6"].
+- If there is a priority like multiplication or division, it computes the value without adding it to the list of double like: `["2", "*", "3"]` -> `["6"]`.
 
 And add the last number to the list of double.
 
